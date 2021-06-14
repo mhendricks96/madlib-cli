@@ -1,4 +1,6 @@
-import re
+# Imported modules
+
+import re #regex
 print(
 '''
 Welcome to Michael's Madlib
@@ -11,7 +13,10 @@ You what type, and you enter a word. Ready or not, here we go
 
 '''
 )
+# Global variables
 user_answers_list = []
+
+#Functions
 
 def fill_user_answers_list(word_types):
   for i in word_types:
@@ -42,7 +47,7 @@ def parse_template(string):
   
 def merge(bare_template, user_input_list):
   text = bare_template.split()
-  my_list = user_input_list
+  my_list = list(user_input_list)
   
   for i in range(len(text)):
     brackets = re.match(r"\{(.*?)\}", text[i])
@@ -52,14 +57,25 @@ def merge(bare_template, user_input_list):
     
     final_string = ' '.join(text)
   
+  print('''
+  **************
+  Thank You! 
+  Here is your completed Madgab!
+  **************
+  ''')
+
   print (final_string)
+  return (final_string)
 
 
 
-
+# Running Code
 stripped_contents = read_template("assets/madlibs-template.txt")
 empty_brackets = parse_template(stripped_contents)
 
 fill_user_answers_list(empty_brackets[1])
 
-merge(empty_brackets[0], user_answers_list)  
+fill_template = merge(empty_brackets[0], user_answers_list) 
+
+with open('assets/new-madlibs-answer.txt', 'w') as filled_madlib:
+  filled_madlib.write(fill_template)
