@@ -56,6 +56,7 @@ def merge(bare_template, user_input_list):
       text[i] = new_word
     
     final_string = ' '.join(text)
+    
   
   print('''
   **************
@@ -70,12 +71,14 @@ def merge(bare_template, user_input_list):
 
 
 # Running Code
-stripped_contents = read_template("assets/madlibs-template.txt")
-empty_brackets = parse_template(stripped_contents)
 
-fill_user_answers_list(empty_brackets[1])
+if __name__ == "__main__":
+  stripped_content = read_template("assets/madlibs-template.txt")
+  empty_brackets = parse_template(stripped_content)
 
-fill_template = merge(empty_brackets[0], user_answers_list) 
+  fill_user_answers_list(empty_brackets[1])
 
-with open('assets/new-madlibs-answer.txt', 'w') as filled_madlib:
-  filled_madlib.write(fill_template)
+  fill_template = merge(empty_brackets[0], user_answers_list) 
+
+  with open('assets/new-madlibs-answer.txt', 'w') as filled_madlib:
+    filled_madlib.write(fill_template)
